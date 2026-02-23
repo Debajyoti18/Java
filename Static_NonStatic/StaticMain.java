@@ -63,3 +63,20 @@ public class StaticMain {
         obj.nonStaticMethod();
     }
 }
+/*
+output
+Static Block Executed
+Main Method Started
+Static variable: 500
+Inside Static Method
+Access staticVar: 500
+Instance Block Executed
+Constructor Executed
+Access nonStaticVar via object: 300
+Instance Block Executed
+Constructor Executed
+Non-static variable: 300
+Inside Non-Static Method
+Access staticVar: 500
+Access nonStaticVar: 300
+ */
