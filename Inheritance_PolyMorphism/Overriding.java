@@ -22,6 +22,6 @@ public class Overriding {
         Dog d = new Dog();//allowed
         d.sound(); // Calls Dog version
         
-        Dog d = new Animal(); // ❌ Compile error - cannot assign parent to child
+        Dog d = new Animal(); //  Compile error - cannot assign parent to child
     }
 }
