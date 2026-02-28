@@ -1,0 +1,131 @@
+
+// Functional Interface
+@FunctionalInterface
+interface Calculator {
+    int operate(int a, int b);
+}
+
+// First Interface
+interface Engine {
+
+    // Constant (public static final by default)
+    int MAX_SPEED = 200;
+
+    // Abstract method (public abstract by default)
+    void start();
+
+    // Default method in java8
+    default void fuel() {
+        System.out.println("Fuel type: Petrol");
+    }
+
+    // Static method
+    static void engineInfo() {
+        System.out.println("Engines convert fuel into motion");
+    }
+
+    // Private method (Java 9+)
+    private void internalCheck() {
+        System.out.println("Internal engine check complete");
+    }
+
+    // Default method calling private method
+    default void diagnostics() {
+        internalCheck();
+        System.out.println("Diagnostics completed");
+    }
+}
+
+// Second Interface
+interface MusicSystem {
+    void playMusic();
+
+    default void volume() {
+        System.out.println("Volume set to medium");
+    }
+}
+
+// Interface extending another interface
+interface SmartFeatures extends MusicSystem {
+    void gps();
+}
+
+// Class implementing multiple interfaces
+class Car implements Engine, SmartFeatures {
+
+    // Must implement abstract methods
+    @Override
+    public void start() {
+        System.out.println("Car starts with push button");
+    }
+
+    @Override
+    public void playMusic() {
+        System.out.println("Playing music in car");
+    }
+
+    @Override
+    public void gps() {
+        System.out.println("GPS navigation started");
+    }
+
+    // Resolving default method conflict (if both had same method)
+    @Override
+    public void volume() {
+        System.out.println("Custom car volume control");
+    }
+}
+
+// Main Class
+public class InterfaceFullDemo {
+
+    public static void main(String[] args) {
+
+        System.out.println("===== Static Method in Interface =====");
+        Engine.engineInfo();
+
+        System.out.println("\n===== Polymorphism =====");
+        Engine e = new Car();   // Interface reference
+        e.start();
+        e.fuel();
+        e.diagnostics();
+
+        System.out.println("\n===== Access Constant =====");
+        System.out.println("Max Speed: " + Engine.MAX_SPEED);
+
+        System.out.println("\n===== Multiple Inheritance via Interface =====");
+        Car car = new Car();
+        car.playMusic();
+        car.gps();
+        car.volume();
+
+        System.out.println("\n===== Functional Interface + Lambda =====");
+        Calculator add = (a, b) -> a + b;
+        System.out.println("Addition: " + add.operate(10, 20));
+
+        System.out.println("\n===== Program Completed =====");
+    }
+}
+
+/*
+===== Static Method in Interface =====
+Engines convert fuel into motion
+
+===== Polymorphism =====
+Car starts with push button
+Fuel type: Petrol
+Internal engine check complete
+Diagnostics completed
+
+===== Access Constant =====
+Max Speed: 200
+
+===== Multiple Inheritance via Interface =====
+Playing music in car
+GPS navigation started
+Custom car volume control
+
+===== Functional Interface + Lambda =====
+Addition: 30
+
+===== Program Completed ===== */
